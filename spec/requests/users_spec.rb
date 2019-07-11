@@ -61,8 +61,8 @@ RSpec.describe 'Users API', type: :request do
                 expect(json['name'].to eq('Jessica Day'))
             end
 
-            it 'returns status code 200' do
-                expect(response).to have_http_status(200)
+            it 'returns status code 201' do
+                expect(response).to have_http_status(201)
             end
         end
 
