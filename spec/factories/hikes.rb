@@ -5,6 +5,6 @@ FactoryBot.define do
         distance { Faker::Number.decimal(1) }
         elevation_gain { Faker::Number.number(4) }
         date_completed { Faker::Date.backward(14) }
-        user_id 1
+        # user_id nil
     end 
 end 
