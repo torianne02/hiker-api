@@ -74,7 +74,7 @@ RSpec.describe 'Users API', type: :request do
             end 
 
             it 'returns a validation failure message' do
-                expect(response.body).to match(/Validation failed: Username, Password, Age, and Gender can't be blank/)
+                expect(response.body).to match(/Validation failed: Password can't be blank, Username can't be blank, Age can't be blank, Gender can't be blank/)
             end
         end
     end
