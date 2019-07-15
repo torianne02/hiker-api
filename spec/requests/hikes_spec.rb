@@ -99,7 +99,7 @@ RSpec.describe 'Hikes API' do
 
       it 'updates the hike' do
         updated_hike = Hike.find(id)
-        expect(updated_hike.distance).to match(/3.0/)
+        expect(updated_hike.distance).to eq(3.0)
       end 
     end 
 
