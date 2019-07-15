@@ -115,4 +115,13 @@ RSpec.describe 'Hikes API' do
       end 
     end 
   end 
+
+    # test suite for DELETE /users/:user_id/hikes/:id
+    describe 'DELETE /users/:user_id/hikes/:id' do
+      before { delete "/users/#{user_id}/hikes/#{id}" }
+
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end 
+    end
 end 
