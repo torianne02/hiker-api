@@ -61,4 +61,29 @@ RSpec.describe 'Hikes API' do
     end 
   end 
 
+  # test suite for POST /users/:user_id/hikes 
+  describe 'POST /users/:user_id/hikes' do 
+    let(:valid_attributes) { { name: 'Seven Springs Trail', location: 'Fremont Older Open Space Preserve', distance: '3.1', elevation_gain: '614', date_completed: '06-11-2019' } }  
+
+    context 'when request attributes are valid' do
+      before { post "users/#{user_id}/hikes", params: valid_attributes }
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end 
+    end 
+
+    context 'when an invalid request' do
+      before { post "/users/#{user_id}/hikes", params: {} }
+
+      it 'returns status code 422' do 
+        expect(response).to have_http_status(422)
+      end 
+
+      it 'returns a failure message' do 
+        expect(response.body).to match(/Validation failed: Name can't be blank, Location can't be blank, Distance can't be blank, Elevation_Gain can't be blank, Date_Completed can't be blank/)
+      end 
+    end 
+  end 
+  
 end 
