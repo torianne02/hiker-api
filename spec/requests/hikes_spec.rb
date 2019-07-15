@@ -85,5 +85,34 @@ RSpec.describe 'Hikes API' do
       end 
     end 
   end 
-  
+
+  # test suite for PUT /users/:user_id/hikes/:id
+  describe 'PUT /users/user_id/hikes/:id' do 
+    let(:valid_attributes) { { distance: '3.0' } }
+    
+    before { put "/users/#{user_id}/hikes/#{id}", params: valid_attributes }
+
+    context 'when hike exists' do 
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end 
+
+      it 'updates the hike' do
+        updated_hike = Hike.find(id)
+        expect(updated_hike.distance).to match(/3.0/)
+      end 
+    end 
+
+    context 'when the hike does not exist' do
+      let(:id) { 0 }
+
+      it 'returns status code 404' do 
+        expect(response).to have_http_status(404)
+      end 
+
+      it 'returns a not found message' do 
+        expect(response.body).to match(/Couldn't find Hike/)
+      end 
+    end 
+  end 
 end 
