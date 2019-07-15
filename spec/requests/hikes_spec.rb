@@ -32,4 +32,33 @@ RSpec.describe 'Hikes API' do
         expect(response.body).to match(/Couldn't find User/)
       end 
     end 
+  end
+  
+  # test suite for GET /users/:user_id/hikes/:id
+  describe 'GET /users/:user_id/hikes/:id' do
+    before { get "/users/#{user_id}/hikes/#{id}" }
+    
+    context 'when user hike exists' do
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end 
+
+      it 'returns the hike' do 
+        expect(json['id']).to eq(id)
+      end
+    end  
+
+    context 'when user hike does not exist' do 
+      let(:id) { 0 }
+
+      it 'returns status code 404' do 
+        expect(response).to have_http_status(404)
+      end 
+
+      it 'returns a not found message' do 
+        expect(response.body).to match(/Couldn't find Hike/)
+      end 
+    end 
+  end 
+
 end 
