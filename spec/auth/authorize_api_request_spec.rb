@@ -11,7 +11,7 @@ RSpec.describe AuthorizeApiRequest do
   subject(:invalid_request_obj) { described_class.new({}) }
 
   # valid request subject
-  subject(request_obj) { described_class.new(header) }
+  subject(:request_obj) { described_class.new(header) }
 
   # test suite for AuthorizeApiRequest#call
   describe '#call' do
