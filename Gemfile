@@ -17,7 +17,8 @@ gem 'puma', '~> 3.11'
 gem 'bcrypt', '~> 3.1.7'
 # binding.pry for debugging
 gem 'pry'
-
+# manage JSON web tokens 
+gem 'jwt'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
