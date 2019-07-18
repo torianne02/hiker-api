@@ -6,10 +6,11 @@ RSpec.describe 'Hikes API' do
   let!(:hikes) { create_list(:hike, 20, user_id: user.id) }
   let(:user_id) { user.id }
   let(:id) { hikes.first.id }
+  let(:headers) { valid_headers } 
 
   # test suite for GET /users/:user_id/hikes
   describe 'GET /users/:user_id/hikes' do
-    before { get "/users/#{user_id}/hikes" }
+    before { get "/users/#{user_id}/hikes", params: {}, headers: headers }
     
     context 'when user exists' do
       it 'returns status code 200' do 
@@ -36,7 +37,7 @@ RSpec.describe 'Hikes API' do
   
   # test suite for GET /users/:user_id/hikes/:id
   describe 'GET /users/:user_id/hikes/:id' do
-    before { get "/users/#{user_id}/hikes/#{id}" }
+    before { get "/users/#{user_id}/hikes/#{id}", params: {}, headers: headers }
     
     context 'when user hike exists' do
       it 'returns status code 200' do
@@ -63,10 +64,12 @@ RSpec.describe 'Hikes API' do
 
   # test suite for POST /users/:user_id/hikes 
   describe 'POST /users/:user_id/hikes' do 
-    let(:valid_attributes) { { name: 'Seven Springs Trail', location: 'Fremont Older Open Space Preserve', distance: '3.1', elevation_gain: '614', date_completed: '06-11-2019' } }  
+    let(:valid_attributes) do
+       { name: 'Seven Springs Trail', location: 'Fremont Older Open Space Preserve', distance: '3.1', elevation_gain: '614', date_completed: '06-11-2019' }.to_json 
+    end   
 
     context 'when request attributes are valid' do
-      before { post "/users/#{user_id}/hikes", params: valid_attributes }
+      before { post "/users/#{user_id}/hikes", params: valid_attributes, headers: headers }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -74,23 +77,24 @@ RSpec.describe 'Hikes API' do
     end 
 
     context 'when an invalid request' do
-      before { post "/users/#{user_id}/hikes", params: {} }
+      let(:invalid_attributes) { { name: nil}.to_json }
+      before { post "/users/#{user_id}/hikes", params: invalid_attributes, headers: headers }
 
       it 'returns status code 422' do 
         expect(response).to have_http_status(422)
       end 
 
       it 'returns a failure message' do 
-        expect(response.body).to match(/Validation failed: Name can't be blank, Location can't be blank, Distance can't be blank, Date completed can't be blank, Elevation gain can't be blank/)
+        expect(json['message']).to match(/Validation failed: Name can't be blank, Location can't be blank, Distance can't be blank, Date completed can't be blank, Elevation gain can't be blank/)
       end 
     end 
   end 
 
   # test suite for PUT /users/:user_id/hikes/:id
   describe 'PUT /users/user_id/hikes/:id' do 
-    let(:valid_attributes) { { distance: '3.0' } }
+    let(:valid_attributes) { { distance: '3.0' }.to_json }
     
-    before { put "/users/#{user_id}/hikes/#{id}", params: valid_attributes }
+    before { put "/users/#{user_id}/hikes/#{id}", params: valid_attributes, headers: headers }
 
     context 'when hike exists' do 
       it 'returns status code 204' do
@@ -118,7 +122,7 @@ RSpec.describe 'Hikes API' do
 
     # test suite for DELETE /users/:user_id/hikes/:id
     describe 'DELETE /users/:user_id/hikes/:id' do
-      before { delete "/users/#{user_id}/hikes/#{id}" }
+      before { delete "/users/#{user_id}/hikes/#{id}", params: {}, headers: headers }
 
       it 'returns status code 204' do
         expect(response).to have_http_status(204)
