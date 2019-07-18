@@ -1,9 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'Users API', type: :request do
-  # initialize test data
+  # initialize test data for user data
   let!(:users) { create_list(:user, 10) }
   let(:user_id) { users.first.id }
+
+  # initialize test data for sign-up/sign-in
+  let(:user) { build(:user) }
+  let(:headers) { valid_headers.except('Authorization') }
+  let(:user_valid_attr) do 
+    attributes_for(:user, password_confirmation: user.password)
+  end 
 
   # test suite for GET /users
   describe 'GET /users' do
