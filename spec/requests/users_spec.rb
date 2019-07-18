@@ -5,13 +5,6 @@ RSpec.describe 'Users API', type: :request do
   let!(:users) { create_list(:user, 10) }
   let(:user_id) { users.first.id }
 
-  # initialize test data for sign-up/sign-in
-  let(:user) { build(:user) }
-  let(:headers) { valid_headers.except('Authorization') }
-  let(:user_valid_attr) do 
-    attributes_for(:user, password_confirmation: user.password)
-  end 
-
   # test suite for GET /users
   describe 'GET /users' do
     # make HTTP request
@@ -57,34 +50,34 @@ RSpec.describe 'Users API', type: :request do
   end 
 
     # test suite for POST /users
-  describe 'POST /users' do
-    # valid payload 
-    let(:valid_attributes) { { name: 'Jessica Day', username: 'JAD', password: 'ab56q5u8', age: '26', gender: 'female' } }
+  # describe 'POST /users' do
+  #   # valid payload 
+  #   let(:valid_attributes) { { name: 'Jessica Day', username: 'JAD', password: 'ab56q5u8', age: '26', gender: 'female' } }
 
-    context 'when the request is valid' do
-      before { post '/users', params: valid_attributes }
+  #   context 'when the request is valid' do
+  #     before { post '/users', params: valid_attributes }
 
-      it 'creates a user' do 
-        expect(json['name']).to eq('Jessica Day')
-      end
+  #     it 'creates a user' do 
+  #       expect(json['name']).to eq('Jessica Day')
+  #     end
 
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
-    end
+  #     it 'returns status code 200' do
+  #       expect(response).to have_http_status(200)
+  #     end
+  #   end
 
-    context 'when the request is invalid' do 
-      before {post '/users', params: { name: 'Nick Miller' } }
+  #   context 'when the request is invalid' do 
+  #     before {post '/users', params: { name: 'Nick Miller' } }
 
-      it 'returns status code 422' do 
-        expect(response).to have_http_status(422)
-      end 
+  #     it 'returns status code 422' do 
+  #       expect(response).to have_http_status(422)
+  #     end 
 
-      it 'returns a validation failure message' do
-        expect(response.body).to match(/Validation failed: Password can't be blank, Username can't be blank, Age can't be blank, Gender can't be blank/)
-      end
-    end
-  end
+  #     it 'returns a validation failure message' do
+  #       expect(response.body).to match(/Validation failed: Password can't be blank, Username can't be blank, Age can't be blank, Gender can't be blank/)
+  #     end
+  #   end
+  # end
 
   # test suite for PUT /users/:id
   describe 'PUT /users/:id' do
@@ -111,5 +104,44 @@ RSpec.describe 'Users API', type: :request do
       expect(response).to have_http_status(204)
     end 
   end
+
+  # initialize test data for sign-up/sign-in
+  let(:user) { build(:user) }
+  let(:headers) { valid_headers.except('Authorization') }
+  let(:user_valid_attr) do 
+    attributes_for(:user, password_confirmation: user.password)
+  end 
+
+  # test suite for user sign-uo
+  describe 'POST /signup' do
+    context 'when valid request' do 
+      before { post '/signup', params: user_valid_attr.to_json, headers: headers }
+
+      it 'creates a new user' do
+        expect(response).to have_http_status(201)
+      end 
+
+      it 'returns success message' do
+        expect(json['message']).to match(/Account created successfully/)
+      end 
+
+      it 'returns an authentication token' do 
+        expect(json['auth_token']).not_to be_nil
+      end 
+    end 
+
+    context 'when invalid request' do
+      before { post '/signup', params: {}, headers: headers }
+
+      it 'does not create a new user' do 
+        expect(response).to have_http_status(422)
+      end 
+
+      it 'returns failure message' do
+        expect(json['message']).to match(/Validation failed: Password can't be blank, Username can't be blank, Age can't be blank, Gender can't be blank, Password digest can't be blank/)
+      end 
+    end 
+  end 
 end 
+
             
