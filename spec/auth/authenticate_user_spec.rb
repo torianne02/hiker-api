@@ -20,5 +20,11 @@ RSpec.describe AuthenticateUser do
       end 
     end 
 
+    # raise Authentication Error when request is invalid
+    context 'when invalid credentials' do 
+      it 'raises an authentication error' do 
+        expect { invalid_auth_obj.call }.to raise_error(ExceptionHandler::AuthenticationError, /Invalid credentials/)
+      end 
+    end
   end 
 end
