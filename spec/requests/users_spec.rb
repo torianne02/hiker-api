@@ -4,11 +4,12 @@ RSpec.describe 'Users API', type: :request do
   # # initialize test data for user data
   # let!(:users) { create_list(:user, 10) }
   # let(:user_id) { users.first.id }
+  # let(:headers) { valid_headers }
 
   # # test suite for GET /users
   # describe 'GET /users' do
   #   # make HTTP request
-  #   before { get '/users' }
+  #   before { get '/users', params: {}, headers: headers }
 
   #   it 'returns users' do
   #     expect(json).not_to be_empty
@@ -23,7 +24,7 @@ RSpec.describe 'Users API', type: :request do
   #   # test suite for GET /users/:id
   # describe 'GET /users/:id' do
   #   # make HTTP request
-  #   before { get "/users/#{user_id}" }
+  #   before { get "/users/#{user_id}", params: {}, headers: headers }
 
   #   context 'when the record exists' do
   #     it 'returns the user' do
@@ -81,10 +82,10 @@ RSpec.describe 'Users API', type: :request do
 
   # # test suite for PUT /users/:id
   # describe 'PUT /users/:id' do
-  #   let(:valid_attributes) { { name: 'Nick Miller' } }
+  #   let(:valid_attributes) { { name: 'Nick Miller' }.to_json }
 
   #   context 'when the record exists' do
-  #     before { put "/users/#{user_id}", params: valid_attributes }
+  #     before { put "/users/#{user_id}", params: valid_attributes, params: valid_attributes, headers: headers }
 
   #     it 'updates the record' do 
   #       expect(response.body).to be_empty 
@@ -98,7 +99,7 @@ RSpec.describe 'Users API', type: :request do
 
   # # test suite for DELETE /users/:id
   # describe 'DELETE /users/:id' do
-  #   before { delete "/users/#{user_id}" }
+  #   before { delete "/users/#{user_id}", params: {}, headers: headers }
 
   #   it 'returns status code 204' do
   #     expect(response).to have_http_status(204)
