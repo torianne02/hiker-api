@@ -48,20 +48,24 @@ RSpec.describe 'Users API', type: :request do
   # let(:user_id) { users.first.id }
   # let(:headers) { valid_headers }
 
-  # # test suite for GET /users
-  # describe 'GET /users' do
-  #   # make HTTP request
-  #   before { get '/users', params: {}, headers: headers }
+  # test suite for GET /users
+  describe 'GET /users' do
+    let!(:users) { create_list(:user, 10) }
+    let(:headers) { valid_headers }
 
-  #   it 'returns users' do
-  #     expect(json).not_to be_empty
-  #     expect(json.size).to eq(10)
-  #   end 
+    # make HTTP request
+    before { get '/users', params: {}, headers: headers }
 
-  #   it 'returns status code 200' do
-  #     expect(response).to have_http_status(200)
-  #   end 
-  # end 
+    it 'returns users' do
+      expect(json).not_to be_empty
+      # 10 new + already existing user for other tests = 11 
+      expect(json.size).to eq(11)
+    end 
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
+    end 
+  end 
 
   # test suite for GET /users/:id
   describe 'GET /users/:id' do
@@ -125,22 +129,23 @@ RSpec.describe 'Users API', type: :request do
   #   end
   # end
 
-  # # test suite for PUT /users/:id
-  # describe 'PUT /users/:id' do
-  #   let(:valid_attributes) { { name: 'Nick Miller' }.to_json }
+  # test suite for PUT /users/:id
+  describe 'PUT /users/:id' do
+    let(:headers) { valid_headers }
+    let(:valid_attributes) { { name: 'Nick Miller' }.to_json }
 
-  #   context 'when the record exists' do
-  #     before { put "/users/#{user_id}", params: valid_attributes, params: valid_attributes, headers: headers }
+    context 'when the record exists' do
+      before { put "/users/#{user_id}", params: valid_attributes, headers: headers }
 
-  #     it 'updates the record' do 
-  #       expect(response.body).to be_empty 
-  #     end
+      it 'updates the record' do 
+        expect(response.body).to be_empty 
+      end
 
-  #     it 'returns status code 204' do
-  #       expect(response).to have_http_status(204)
-  #     end
-  #   end
-  # end 
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+  end 
 
   # test suite for DELETE /users/:id
   describe 'DELETE /users/:id' do
