@@ -150,26 +150,4 @@ RSpec.describe 'Users API', type: :request do
   #     expect(response).to have_http_status(204)
   #   end 
   # end
-end 
-
-# RSpec.describe 'Users API', type: :request do
-#   # initialize test data for user data
-#   let!(:users) { create_list(:user, 10) }
-#   let(:user_id) { users.first.id }
-#   let(:headers) { valid_headers }
-
-#   # test suite for GET /users
-#   describe 'GET /users' do
-#     # make HTTP request
-#     before { get '/users', params: {}, headers: headers }
-
-#     it 'returns users' do
-#       expect(json).not_to be_empty
-#       expect(json.size).to eq(10)
-#     end 
-
-#     it 'returns status code 200' do
-#       expect(response).to have_http_status(200)
-#     end 
-#   end 
-# end         
+end         
