@@ -42,7 +42,7 @@ RSpec.describe 'Users API', type: :request do
   # ------------- DEAD CODE (FOR NOW) -------------
   # will add user show and update functionality later - - maybe also index but unsure
 
-  # # initialize test data for user data
+  # initialize test data for user data
   # let!(:users) { create_list(:user, 10) }
   # let(:user_id) { users.first.id }
   # let(:headers) { valid_headers }
@@ -62,34 +62,38 @@ RSpec.describe 'Users API', type: :request do
   #   end 
   # end 
 
-  #   # test suite for GET /users/:id
-  # describe 'GET /users/:id' do
-  #   # make HTTP request
-  #   before { get "/users/#{user_id}", params: {}, headers: headers }
+  # test suite for GET /users/:id
+  describe 'GET /users/:id' do
+    let(:user_id) { user.id }
+    let(:headers) { valid_headers }
+    
+    # make HTTP request
+    before { get "/users/#{user_id}", params: {}, headers: headers }
 
-  #   context 'when the record exists' do
-  #     it 'returns the user' do
-  #       expect(json).not_to be_empty
-  #       expect(json['id']).to eq(user_id)
-  #     end 
+    context 'when the record exists' do
+      it 'returns the user' do
+        expect(json).not_to be_empty
+        expect(json['id']).to eq(user_id)
+      end 
 
-  #     it 'returns status code 200' do
-  #       expect(response).to have_http_status(200)
-  #     end
-  #   end 
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+        # erroring with "Invalid token couldn't find User without an ID"
+      end
+    end 
 
-  #   context 'when the record does not exist' do
-  #     let(:user_id) { 100 }
+    context 'when the record does not exist' do
+      let(:user_id) { 100 }
 
-  #     it 'returns status code 404' do 
-  #       expect(response).to have_http_status(404)
-  #     end 
+      it 'returns status code 422' do 
+        expect(response).to have_http_status(422)
+      end 
 
-  #     it 'returns a not found message' do
-  #       expect(response.body).to match(/Couldn't find User/)
-  #     end
-  #   end 
-  # end 
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find User/)
+      end
+    end 
+  end 
 
   # # test suite for POST /users
   # describe 'POST /users' do
@@ -148,4 +152,24 @@ RSpec.describe 'Users API', type: :request do
   # end
 end 
 
-            
+# RSpec.describe 'Users API', type: :request do
+#   # initialize test data for user data
+#   let!(:users) { create_list(:user, 10) }
+#   let(:user_id) { users.first.id }
+#   let(:headers) { valid_headers }
+
+#   # test suite for GET /users
+#   describe 'GET /users' do
+#     # make HTTP request
+#     before { get '/users', params: {}, headers: headers }
+
+#     it 'returns users' do
+#       expect(json).not_to be_empty
+#       expect(json.size).to eq(10)
+#     end 
+
+#     it 'returns status code 200' do
+#       expect(response).to have_http_status(200)
+#     end 
+#   end 
+# end         
