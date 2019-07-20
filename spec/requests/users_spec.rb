@@ -40,14 +40,6 @@ RSpec.describe 'Users API', type: :request do
     end 
   end 
 
-  # ------------- DEAD CODE (FOR NOW) -------------
-  # will add user show and update functionality later - - maybe also index but unsure
-
-  # initialize test data for user data
-  # let!(:users) { create_list(:user, 10) }
-  # let(:user_id) { users.first.id }
-  # let(:headers) { valid_headers }
-
   # test suite for GET /users
   describe 'GET /users' do
     let!(:users) { create_list(:user, 10) }
@@ -98,36 +90,6 @@ RSpec.describe 'Users API', type: :request do
       end
     end 
   end 
-
-  # # test suite for POST /users
-  # describe 'POST /users' do
-  #   # valid payload 
-  #   let(:valid_attributes) { { name: 'Jessica Day', username: 'JAD', password: 'ab56q5u8', age: '26', gender: 'female' } }
-
-  #   context 'when the request is valid' do
-  #     before { post '/users', params: valid_attributes }
-
-  #     it 'creates a user' do 
-  #       expect(json['name']).to eq('Jessica Day')
-  #     end
-
-  #     it 'returns status code 200' do
-  #       expect(response).to have_http_status(200)
-  #     end
-  #   end
-
-  #   context 'when the request is invalid' do 
-  #     before {post '/users', params: { name: 'Nick Miller' } }
-
-  #     it 'returns status code 422' do 
-  #       expect(response).to have_http_status(422)
-  #     end 
-
-  #     it 'returns a validation failure message' do
-  #       expect(response.body).to match(/Validation failed: Password can't be blank, Username can't be blank, Age can't be blank, Gender can't be blank/)
-  #     end
-  #   end
-  # end
 
   # test suite for PUT /users/:id
   describe 'PUT /users/:id' do
