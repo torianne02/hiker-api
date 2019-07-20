@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
   skip_before_action :authorize_request, only: :create
 
   # WILL implement show, update, and destroy functionality in the future - - maybe index
 
-  # # GET /users
-  # def index
-  #   @users = User.all
-  #   json_response(@users)
-  # end 
+  # GET /users
+  def index
+    @users = User.all
+    json_response(@users)
+  end 
 
   # POST /users
   def create
@@ -22,10 +22,10 @@ class UsersController < ApplicationController
     # json_response(@user)
   end 
 
-  # # GET /users/:id
-  # def show
-  #   json_response(@user)
-  # end 
+  # GET /users/:id
+  def show
+    json_response(@user)
+  end 
 
   # # PUT /users/:id
   # def update
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     params.permit(:name, :username, :password, :age, :gender)
   end 
 
-  # def set_user
-  #   @user = User.find(params[:id])
-  # end 
+  def set_user
+    @user = User.find(params[:id])
+  end 
 end
