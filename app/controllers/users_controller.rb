@@ -32,10 +32,10 @@ class UsersController < ApplicationController
   #   @user.update(user_params)
   # end 
 
-  # # DELETE /users/:id 
-  # def destroy
-  #   @user.destroy
-  # end
+  # DELETE /users/:id 
+  def destroy
+    @user.destroy
+  end
 
   private 
 
