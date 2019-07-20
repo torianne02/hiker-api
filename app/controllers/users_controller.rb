@@ -27,10 +27,10 @@ class UsersController < ApplicationController
     json_response(@user)
   end 
 
-  # # PUT /users/:id
-  # def update
-  #   @user.update(user_params)
-  # end 
+  # PUT /users/:id
+  def update
+    @user.update(user_params)
+  end 
 
   # DELETE /users/:id 
   def destroy
