@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Users API', type: :request do
   # initialize test data for sign-up/sign-in
-  let(:user) { build(:user) }
+  let(:user) { create(:user) }
+  let(:user_id) { user.id }
   let(:headers) { valid_headers.except('Authorization') }
   let(:user_valid_attr) do 
     attributes_for(:user)
@@ -64,7 +65,6 @@ RSpec.describe 'Users API', type: :request do
 
   # test suite for GET /users/:id
   describe 'GET /users/:id' do
-    let(:user_id) { user.id }
     let(:headers) { valid_headers }
     
     # make HTTP request
@@ -85,8 +85,8 @@ RSpec.describe 'Users API', type: :request do
     context 'when the record does not exist' do
       let(:user_id) { 100 }
 
-      it 'returns status code 422' do 
-        expect(response).to have_http_status(422)
+      it 'returns status code 404' do 
+        expect(response).to have_http_status(404)
       end 
 
       it 'returns a not found message' do
@@ -142,12 +142,14 @@ RSpec.describe 'Users API', type: :request do
   #   end
   # end 
 
-  # # test suite for DELETE /users/:id
-  # describe 'DELETE /users/:id' do
-  #   before { delete "/users/#{user_id}", params: {}, headers: headers }
+  # test suite for DELETE /users/:id
+  describe 'DELETE /users/:id' do
+    let(:headers) { valid_headers }
 
-  #   it 'returns status code 204' do
-  #     expect(response).to have_http_status(204)
-  #   end 
-  # end
+    before { delete "/users/#{user_id}", params: {}, headers: headers }
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end 
+  end
 end         
