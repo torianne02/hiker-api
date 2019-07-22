@@ -1,4 +1,4 @@
-class V1::HikesController < ApplicationController
+class Api::V1::HikesController < ApplicationController
   before_action :set_user
   before_action :set_hike, only: [:show, :update, :destroy]
 
