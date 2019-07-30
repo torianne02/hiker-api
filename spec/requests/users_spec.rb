@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Users API', type: :request do
+RSpec.describe API::V1::Users, type: :request do
   # initialize test data for sign-up/sign-in
   let(:user) { create(:user) }
   let(:user_id) { user.id }
