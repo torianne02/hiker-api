@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Hikes API' do 
+RSpec.describe Api::V1::HikesController do 
   # initialize test data
   let!(:user) { create(:user) }
   let!(:hikes) { create_list(:hike, 20, user_id: user.id) }
