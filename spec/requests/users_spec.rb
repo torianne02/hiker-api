@@ -41,12 +41,12 @@ RSpec.describe Api::V1::UsersController, type: :request do
   end 
 
   # test suite for GET /users
-  describe 'GET /users' do
+  describe 'GET api/v1/users' do
     let!(:users) { create_list(:user, 10) }
     let(:headers) { valid_headers }
 
     # make HTTP request
-    before { get '/users', params: {}, headers: headers }
+    before { get '/api/v1/users', params: {}, headers: headers }
 
     it 'returns users' do
       expect(json).not_to be_empty
@@ -60,11 +60,11 @@ RSpec.describe Api::V1::UsersController, type: :request do
   end 
 
   # test suite for GET /users/:id
-  describe 'GET /users/:id' do
+  describe 'GET api/v1/users/:id' do
     let(:headers) { valid_headers }
     
     # make HTTP request
-    before { get "/users/#{user_id}", params: {}, headers: headers }
+    before { get "/api/v1/users/#{user_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the user' do
@@ -92,12 +92,12 @@ RSpec.describe Api::V1::UsersController, type: :request do
   end 
 
   # test suite for PUT /users/:id
-  describe 'PUT /users/:id' do
+  describe 'PUT api/v1/users/:id' do
     let(:headers) { valid_headers }
     let(:valid_attributes) { { name: 'Nick Miller' }.to_json }
 
     context 'when the record exists' do
-      before { put "/users/#{user_id}", params: valid_attributes, headers: headers }
+      before { put "/api/v1/users/#{user_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do 
         expect(response.body).to be_empty 
@@ -110,10 +110,10 @@ RSpec.describe Api::V1::UsersController, type: :request do
   end 
 
   # test suite for DELETE /users/:id
-  describe 'DELETE /users/:id' do
+  describe 'DELETE api/v1/users/:id' do
     let(:headers) { valid_headers }
 
-    before { delete "/users/#{user_id}", params: {}, headers: headers }
+    before { delete "/api/v1/users/#{user_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
