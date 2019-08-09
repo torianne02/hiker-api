@@ -8,11 +8,5 @@ Rails.application.routes.draw do
     end 
   end 
 
-  # namespace :api do
-  #   namespace :v2 do
-  #     resources :users 
-  #   end 
-  # end 
-
   post 'auth/login', to: 'authentication#authenticate'
 end
