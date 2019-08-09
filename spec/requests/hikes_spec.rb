@@ -9,8 +9,8 @@ RSpec.describe Api::V1::HikesController do
   let(:headers) { valid_headers } 
 
   # test suite for GET /users/:user_id/hikes
-  describe 'GET /users/:user_id/hikes' do
-    before { get "/users/#{user_id}/hikes", params: {}, headers: headers }
+  describe 'GET api/v1/users/:user_id/hikes' do
+    before { get "/api/v1/users/#{user_id}/hikes", params: {}, headers: headers }
     
     context 'when user exists' do
       it 'returns status code 200' do 
@@ -36,8 +36,8 @@ RSpec.describe Api::V1::HikesController do
   end
   
   # test suite for GET /users/:user_id/hikes/:id
-  describe 'GET /users/:user_id/hikes/:id' do
-    before { get "/users/#{user_id}/hikes/#{id}", params: {}, headers: headers }
+  describe 'GET api/v1/users/:user_id/hikes/:id' do
+    before { get "/api/v1/users/#{user_id}/hikes/#{id}", params: {}, headers: headers }
     
     context 'when user hike exists' do
       it 'returns status code 200' do
@@ -63,13 +63,13 @@ RSpec.describe Api::V1::HikesController do
   end 
 
   # test suite for POST /users/:user_id/hikes 
-  describe 'POST /users/:user_id/hikes' do 
+  describe 'POST api/v1/users/:user_id/hikes' do 
     let(:valid_attributes) do
        { name: 'Seven Springs Trail', location: 'Fremont Older Open Space Preserve', distance: '3.1', elevation_gain: '614', date_completed: '06-11-2019' }.to_json 
     end   
 
     context 'when request attributes are valid' do
-      before { post "/users/#{user_id}/hikes", params: valid_attributes, headers: headers }
+      before { post "/api/v1/users/#{user_id}/hikes", params: valid_attributes, headers: headers }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -78,7 +78,7 @@ RSpec.describe Api::V1::HikesController do
 
     context 'when an invalid request' do
       let(:invalid_attributes) { { name: nil}.to_json }
-      before { post "/users/#{user_id}/hikes", params: invalid_attributes, headers: headers }
+      before { post "/api/v1/users/#{user_id}/hikes", params: invalid_attributes, headers: headers }
 
       it 'returns status code 422' do 
         expect(response).to have_http_status(422)
@@ -91,10 +91,10 @@ RSpec.describe Api::V1::HikesController do
   end 
 
   # test suite for PUT /users/:user_id/hikes/:id
-  describe 'PUT /users/user_id/hikes/:id' do 
+  describe 'PUT api/v1/users/user_id/hikes/:id' do 
     let(:valid_attributes) { { distance: '3.0' }.to_json }
     
-    before { put "/users/#{user_id}/hikes/#{id}", params: valid_attributes, headers: headers }
+    before { put "/api/v1/users/#{user_id}/hikes/#{id}", params: valid_attributes, headers: headers }
 
     context 'when hike exists' do 
       it 'returns status code 204' do
@@ -121,8 +121,8 @@ RSpec.describe Api::V1::HikesController do
   end 
 
     # test suite for DELETE /users/:user_id/hikes/:id
-    describe 'DELETE /users/:user_id/hikes/:id' do
-      before { delete "/users/#{user_id}/hikes/#{id}", params: {}, headers: headers }
+    describe 'DELETE api/v1/users/:user_id/hikes/:id' do
+      before { delete "/api/v1/users/#{user_id}/hikes/#{id}", params: {}, headers: headers }
 
       it 'returns status code 204' do
         expect(response).to have_http_status(204)
