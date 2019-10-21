@@ -35,7 +35,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
       end 
 
       it 'returns failure message' do
-        expect(json['message']).to match(/Validation failed: Password can't be blank, Name can't be blank, Username can't be blank, Age can't be blank, Gender can't be blank/)
+        expect(json['message']).to match(/Validation failed: Password can't be blank, Name can't be blank, Username can't be blank, Birthday can't be blank, Gender can't be blank/)
       end 
     end 
   end 
