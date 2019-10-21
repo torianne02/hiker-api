@@ -6,7 +6,7 @@ development:
   encoding: unicode
   database: hiker_development
   pool: 5
-  username: victoriafluharty
+  username: 
   password:
   timeout: 5000
 
@@ -36,6 +36,6 @@ test:
   encoding: unicode
   database: hiker_test
   pool: 5
-  username: victoriafluharty
+  username: 
   password:
   timeout: 5000
