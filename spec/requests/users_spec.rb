@@ -9,7 +9,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
     attributes_for(:user)
   end 
 
-  # test suite for user sign-uo
+  # test suite for user signup
   describe 'POST /signup' do
     context 'when valid request' do 
       before { post '/api/v1/signup', params: user_valid_attr.to_json, headers: headers }

@@ -19,7 +19,6 @@ class Api::V1::UsersController < ApplicationController
     response = { message: Message.account_created, auth_token: auth_token}
     
     json_response(response, :created)
-    # json_response(@user)
   end 
 
   # GET /users/:id
