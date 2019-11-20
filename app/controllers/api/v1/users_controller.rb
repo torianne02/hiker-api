@@ -2,8 +2,6 @@ class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
   skip_before_action :authorize_request, only: :create
 
-  # WILL implement show, update, and destroy functionality in the future - - maybe index
-
   # GET /users
   def index
     @users = User.all
@@ -45,4 +43,8 @@ class Api::V1::UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end 
+
+  # def total_distance_hiked
+  #   @total_distance = @user.hikes.sum { |hike| hike.distance }
+  # end 
 end
