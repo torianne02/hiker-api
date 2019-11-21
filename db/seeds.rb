@@ -26,6 +26,8 @@
     distance: Faker::Number.decimal(1), 
     elevation_gain: Faker::Number.number(4), 
     date_completed: Faker::Date.backward(14),
+    rating: Faker::Number.within(1..5),
+    comment: Faker::TvShows::GameOfThrones.quote,
     # duration: 
     user_id: Faker::Number.within(1..15),
     hike_id: Faker::Number.within(1..15)
