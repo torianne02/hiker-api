@@ -1,5 +1,7 @@
 class Hike < ActiveRecord::Base
-  belongs_to :user 
+  belongs_to :park
+  has_many :user_hikes
+  has_many :hikes, through: :user_hikes
 
-  validates :name, :location, :distance, :date_completed, :elevation_gain, :presence => true 
+  validates :name, :presence => true 
 end 
