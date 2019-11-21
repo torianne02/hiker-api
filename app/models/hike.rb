@@ -3,5 +3,5 @@ class Hike < ActiveRecord::Base
   has_many :user_hikes
   has_many :hikes, through: :user_hikes
 
-  validates :name, :presence => true 
+  validates :name, presence: true 
 end 
