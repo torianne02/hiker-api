@@ -7,22 +7,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 15.times do 
- User.create(
-   name: Faker::Name.first_name, 
-   username: Faker::Internet.username, 
-   password: Faker::Internet.password, 
-   birthday: Faker::Date.birthday, 
-   gender: Faker::Gender.binary_type,
-   email: Faker::Internet.email
+  User.create(
+    name: Faker::Name.first_name, 
+    username: Faker::Internet.username, 
+    password: Faker::Internet.password, 
+    birthday: Faker::Date.birthday, 
+    gender: Faker::Gender.binary_type,
+    email: Faker::Internet.email
   )
 
   Hike.create(
     name: Faker::Book.title, 
     location: Faker::Address.city,
     park_id: Faker::Number.within(1..15)
-   )
+  )
 
-   UserHike.create(
+  UserHike.create(
     distance: Faker::Number.decimal(1), 
     elevation_gain: Faker::Number.number(4), 
     date_completed: Faker::Date.backward(14),
@@ -31,11 +31,11 @@
     # duration: 
     user_id: Faker::Number.within(1..15),
     hike_id: Faker::Number.within(1..15)
-   )
+  )
 
-   Park.create(
-     name: Faker::Movies::StarWars.planet,
-     location: Faker::Address.city,
-     park_type: ["federal", "state", "city", "regional"].sample
-   )
+  Park.create(
+    name: Faker::Movies::StarWars.planet,
+    location: Faker::Address.city,
+    park_type: ["federal", "state", "city", "regional"].sample
+  )
 end
