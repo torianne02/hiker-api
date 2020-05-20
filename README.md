@@ -6,13 +6,27 @@ Later version will hopefully include weekly, monthly, and yearly totals.
 
 ## Installation
 
-Clone this repository `$ git clone git@github.com:torianne02/hiker-api.git`
+Clone this repository using
+```bash
+$ git clone git@github.com:torianne02/hiker-api.git
+```
 
-Move into the project directory by running `$ cd hiker`
+Move into the project directory by running 
+```bash
+$ cd hiker-api
+```
 
 ## Usage
 
-TBD
+Install gem dependencies using the command
+```bash
+$ bundler install
+```
+
+Start the server by running
+```bash
+$ rails s
+```
 
 ## Contributing
 
