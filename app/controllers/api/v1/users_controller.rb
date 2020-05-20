@@ -17,7 +17,6 @@ class Api::V1::UsersController < ApplicationController
     response = { message: Message.account_created, auth_token: auth_token}
     
     json_response(response, :created)
-    # json_response(@user)
   end 
 
   # GET /users/:id
@@ -38,10 +37,14 @@ class Api::V1::UsersController < ApplicationController
   private 
 
   def user_params
-    params.permit(:name, :username, :password, :age, :gender)
+    params.permit(:name, :username, :password, :birthday, :gender)
   end 
 
   def set_user
     @user = User.find(params[:id])
   end 
+
+  # def total_distance_hiked
+  #   @total_distance = @user.hikes.sum { |hike| hike.distance }
+  # end 
 end
