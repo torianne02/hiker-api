@@ -5,5 +5,6 @@ FactoryBot.define do
     password { Faker::String.random(8) }
     birthday { Faker::Date.birthday }
     gender { Faker::Gender.binary_type }
+    email { Faker::Internet.email }
   end
 end
