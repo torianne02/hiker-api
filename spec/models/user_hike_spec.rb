@@ -7,8 +7,7 @@ RSpec.describe UserHike, type: :model do
   it { should belong_to(:hike) }
 
   # validation test
-  it { should validate_presence_of(:distance) }
-  it { should validate_presence_of(:elevation_gain) }
-  it { should validate_presence_of(:total_time) }
-  it { should validate_presence_of(:date_completed) }
+  [:distance, :elevation_gain, :total_time, :date_completed].each do |attr|
+    it { should validate_presence_of(attr) }
+  end
 end 

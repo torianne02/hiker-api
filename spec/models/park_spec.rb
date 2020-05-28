@@ -6,7 +6,7 @@ RSpec.describe Park, type: :model do
   it { should have_many(:hikes) }
 
   # Validation test
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:type) }
-  it { should validate_presence_of(:location) }
+  [:name, :type, :location].each do |attr|
+    it { should validate_presence_of(attr) }
+  end
 end 
