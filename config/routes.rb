@@ -3,6 +3,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'signup', to: 'users#create' 
       resources :users do
+        resources :user_hikes
+      end 
+      resources :parks do 
         resources :hikes
       end 
     end 
