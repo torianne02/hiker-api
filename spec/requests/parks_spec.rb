@@ -109,5 +109,14 @@ RSpec.describe Api::V1::ParksController do
         expect(response.body).to match(/Couldn't find Park/)
       end 
     end 
+  end
+
+  # test suite for DELETE /parks/:park_id
+  describe 'DELETE api/v1/parks/:park_id' do
+    before { delete "/api/v1/parks/#{park_id}", params: {}, headers: headers}
+
+    it 'returns status code 204' do 
+      expect(response).to have_http_status(204)
+    end 
   end 
 end 

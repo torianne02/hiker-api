@@ -23,6 +23,11 @@ class Api::V1::ParksController < ApplicationController
     @park.update(park_params)
   end 
 
+  # DELETE /parks/:id
+  def destroy
+    @park.destroy
+  end 
+
   private
 
   def park_params
