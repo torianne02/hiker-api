@@ -34,7 +34,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/torian
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The project is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
 
