@@ -80,4 +80,34 @@ RSpec.describe Api::V1::ParksController do
       end 
     end 
   end 
+
+  # test suite for PUT /parks/:park_id
+  describe 'PUT api/v1/parks/:park_id' do 
+    let(:valid_attributes) { { name: 'Lassen Volcanic National Park' }.to_json }
+
+    before { put "/api/v1/parks/#{park_id}", params: valid_attributes, headers: headers }
+
+    context 'when park exists' do
+      it 'returns status code 204' do 
+        expect(response).to have_http_status(204)
+      end 
+
+      it 'updates the park' do
+        updated_park = Park.find(park_id)
+        expect(updated_park.name).to match(/Lassen Volcanic National Park/)
+      end 
+    end
+    
+    context 'when park does not exist' do 
+      let(:park_id) { 0 }
+
+      it 'returns status code 404' do 
+        expect(response).to have_http_status(404) 
+      end 
+
+      it 'returns a not found message' do 
+        expect(response.body).to match(/Couldn't find Park/)
+      end 
+    end 
+  end 
 end 

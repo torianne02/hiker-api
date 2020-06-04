@@ -18,6 +18,11 @@ class Api::V1::ParksController < ApplicationController
     json_response(@park)
   end 
 
+  # PUT /parks/:id
+  def update
+    @park.update(park_params)
+  end 
+
   private
 
   def park_params
