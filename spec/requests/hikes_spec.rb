@@ -36,8 +36,8 @@ RSpec.describe Api::V1::HikesController do
     end 
   end
   
-  # test suite for GET /parks/:park_id/hikes/:id
-  describe 'GET api/v1/parks/:park_id/hikes/:id' do
+  # test suite for GET /parks/:park_id/hikes/:hike_id
+  describe 'GET api/v1/parks/:park_id/hikes/:hike_id' do
     before { get "/api/v1/parks/#{park_id}/hikes/#{hike_id}", params: {}, headers: headers }
     
     context 'when park hike exists' do
@@ -91,8 +91,8 @@ RSpec.describe Api::V1::HikesController do
     end 
   end 
 
-  # test suite for PUT /parks/:park_id/hikes/:id
-  describe 'PUT api/v1/parks/:park_id/hikes/:id' do 
+  # test suite for PUT /parks/:park_id/hikes/:hike_id
+  describe 'PUT api/v1/parks/:park_id/hikes/:hike_id' do 
     let(:valid_attributes) { { name: 'Lost Cost Trail' }.to_json }
     
     before { put "/api/v1/parks/#{park_id}/hikes/#{hike_id}", params: valid_attributes, headers: headers }
@@ -121,8 +121,8 @@ RSpec.describe Api::V1::HikesController do
     end 
   end 
 
-  # test suite for DELETE /parks/:park_id/hikes/:id
-  describe 'DELETE api/v1/parks/:park_id/hikes/:id' do
+  # test suite for DELETE /parks/:park_id/hikes/:hike_id
+  describe 'DELETE api/v1/parks/:park_id/hikes/:hike_id' do
     before { delete "/api/v1/parks/#{park_id}/hikes/#{hike_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
