@@ -1,16 +1,21 @@
 class Api::V1::ParksController < ApplicationController
   before_action :set_park, only: [:show, :update, :destroy]
 
-  # GET /parks/:park_id/hikes 
+  # GET /parks
   def index 
     @parks = Park.all
     json_response(@parks)
   end 
 
-  # POST /parks/:park_id/hikes
+  # POST /parks
   def create
     Park.create!(park_params)
     json_response(@park, :created)
+  end 
+
+  # GET /parks/:id
+  def show
+    json_response(@park)
   end 
 
   private

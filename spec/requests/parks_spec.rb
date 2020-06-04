@@ -7,7 +7,7 @@ RSpec.describe Api::V1::ParksController do
   let!(:user) { create(:user) } 
   let(:headers) { valid_headers }
 
-  # test suite for park creation
+  # test suite for POST /parks
   describe 'POST /park' do
     let(:valid_attributes) do 
       { name: 'Yosemite National Park', location: 'California', park_type: 'Federal'}.to_json
@@ -54,4 +54,30 @@ RSpec.describe Api::V1::ParksController do
     end
   end 
 
+  # test suit for GET /parks/:park_id
+  describe 'GET api/v1/parks/:park_id' do 
+    before { get "/api/v1/parks/#{park_id}", params: {}, headers: headers }
+
+    context 'when park exists' do 
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end 
+
+      it 'returns the park' do
+        expect(json['id']).to eq(park_id)
+      end
+    end 
+
+    context 'when park does not exist' do 
+      let(:park_id) { 0 }
+
+      it 'returns status code 404' do 
+        expect(response).to have_http_status(404)
+      end 
+
+      it 'returns a not found message' do 
+        expect(response.body).to match(/Couldn't find Park/)
+      end 
+    end 
+  end 
 end 
