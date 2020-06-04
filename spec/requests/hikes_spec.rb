@@ -4,9 +4,9 @@ RSpec.describe Api::V1::HikesController do
   # initialize test data
   let!(:park) { create(:park) }
   let!(:hikes) { create_list(:hike, 20, park_id: park.id) }
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
   let(:park_id) { park.id }
-  let(:id) { hikes.first.id }
+  let(:hike_id) { hikes.first.id }
   let(:headers) { valid_headers } 
 
   # test suite for GET /parks/:park_id/hikes
@@ -38,7 +38,7 @@ RSpec.describe Api::V1::HikesController do
   
   # test suite for GET /parks/:park_id/hikes/:id
   describe 'GET api/v1/parks/:park_id/hikes/:id' do
-    before { get "/api/v1/parks/#{park_id}/hikes/#{id}", params: {}, headers: headers }
+    before { get "/api/v1/parks/#{park_id}/hikes/#{hike_id}", params: {}, headers: headers }
     
     context 'when park hike exists' do
       it 'returns status code 200' do
@@ -46,12 +46,12 @@ RSpec.describe Api::V1::HikesController do
       end 
 
       it 'returns the hike' do 
-        expect(json['id']).to eq(id)
+        expect(json['id']).to eq(hike_id)
       end
     end  
 
     context 'when park hike does not exist' do 
-      let(:id) { 0 }
+      let(:hike_id) { 0 }
 
       it 'returns status code 404' do 
         expect(response).to have_http_status(404)
@@ -95,7 +95,7 @@ RSpec.describe Api::V1::HikesController do
   describe 'PUT api/v1/parks/:park_id/hikes/:id' do 
     let(:valid_attributes) { { name: 'Lost Cost Trail' }.to_json }
     
-    before { put "/api/v1/parks/#{park_id}/hikes/#{id}", params: valid_attributes, headers: headers }
+    before { put "/api/v1/parks/#{park_id}/hikes/#{hike_id}", params: valid_attributes, headers: headers }
 
     context 'when hike exists' do 
       it 'returns status code 204' do
@@ -103,13 +103,13 @@ RSpec.describe Api::V1::HikesController do
       end 
 
       it 'updates the hike' do
-        updated_hike = Hike.find(id)
+        updated_hike = Hike.find(hike_id)
         expect(updated_hike.name).to match(/Lost Cost Trail/)
       end 
     end 
 
     context 'when the hike does not exist' do
-      let(:id) { 0 }
+      let(:hike_id) { 0 }
 
       it 'returns status code 404' do 
         expect(response).to have_http_status(404)
@@ -123,7 +123,7 @@ RSpec.describe Api::V1::HikesController do
 
   # test suite for DELETE /parks/:park_id/hikes/:id
   describe 'DELETE api/v1/parks/:park_id/hikes/:id' do
-    before { delete "/api/v1/parks/#{park_id}/hikes/#{id}", params: {}, headers: headers }
+    before { delete "/api/v1/parks/#{park_id}/hikes/#{hike_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
